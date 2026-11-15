@@ -1,52 +1,243 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Calculadora de Circuitos</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Calculadora de circuitos elétricos para análise de associações em série e paralelo.">
+
+    <title>Calculadora de Circuitos | Física III</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <h1>Calculadora de Circuitos</h1>
+    <!-- CABEÇALHO -->
+    <header class="cabecalho">
 
-  <!-- Quantidades -->
-  <div class="caixa">
-    <label>Resistências (1 a 5):
-      <input type="number" id="qtdR" value="3" min="1" max="5">
-    </label>
-    <label>Voltagens (1 a 10):
-      <input type="number" id="qtdV" value="1" min="1" max="10">
-    </label>
-    <button id="btnGerar">Gerar campos</button>
-  </div>
+        <span class="subtitulo">FÍSICA III</span>
 
-  <!-- Campos criados pelo JavaScript -->
-  <div class="caixa" id="campos"></div>
+        <h1>Calculadora de Circuitos</h1>
 
-  <!-- Escolha do cálculo -->
-  <div class="caixa">
-    <button id="btnSerie">Calcular em série</button>
-    <button id="btnParalelo">Calcular em paralelo</button>
-    <button id="btnMisto">Calcular misto</button>
+        <p>
+            Uma ferramenta interativa para análise de circuitos elétricos.
+        </p>
 
-    <!-- Só aparece depois de clicar em "Calcular misto" -->
-    <div id="areaModelo" hidden>
-      <label>Modelo do misto:
-        <select id="modelo">
-          <option value="1">R1 em série com (R2 em paralelo com R3)</option>
-          <option value="2">(R1 em série com R2) em paralelo com R3</option>
-        </select>
-      </label>
-    </div>
-  </div>
+    </header>
 
-  <!-- Resultado e desenho -->
-  <div class="caixa">
-    <ul id="resultado"></ul>
-    <svg id="circuito" viewBox="0 0 600 160"></svg>
-  </div>
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main>
 
-  <script src="script.js"></script>
+        <!-- CONFIGURAÇÕES -->
+        <section class="caixa configuracoes">
+
+            <h2>Configurações do circuito</h2>
+
+            <p class="descricao">
+                Defina a quantidade de componentes que deseja utilizar.
+            </p>
+
+            <div class="configuracao-item">
+
+                <label for="qtdR">
+                    Quantidade de resistores
+                </label>
+
+                <input
+                    type="number"
+                    id="qtdR"
+                    min="1"
+                    max="5"
+                    value="3"
+                >
+
+            </div>
+
+            <div class="configuracao-item">
+
+                <label for="qtdV">
+                    Quantidade de tensões
+                </label>
+
+                <input
+                    type="number"
+                    id="qtdV"
+                    min="1"
+                    max="10"
+                    value="1"
+                >
+
+            </div>
+
+            <button id="btnGerar" type="button">
+                ⚙ Gerar campos
+            </button>
+
+        </section>
+
+        <!-- COMPONENTES -->
+        <section class="caixa componentes">
+
+            <h2>Valores dos componentes</h2>
+
+            <p class="descricao">
+                Informe os valores das resistências e das fontes de tensão.
+            </p>
+
+            <div id="campos"></div>
+
+        </section>
+
+        <!-- TIPO DE ASSOCIAÇÃO -->
+        <section class="caixa associacao">
+
+            <h2>Tipo de associação</h2>
+
+            <p class="descricao">
+                Selecione a configuração desejada para realizar os cálculos.
+            </p>
+
+            <div class="botoes-calculo">
+
+                <button id="btnSerie" type="button">
+                    ↔ Calcular em série
+                </button>
+
+                <button id="btnParalelo" type="button">
+                    ∥ Calcular em paralelo
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- RESULTADOS -->
+        <section class="caixa resultados">
+
+            <div class="titulo-resultados">
+
+                <h2>Resultados dos cálculos</h2>
+
+                <button
+                    id="btnLimpar"
+                    type="button"
+                    class="btn-limpar"
+                >
+                    Limpar resultados
+                </button>
+
+            </div>
+
+            <p class="descricao">
+                Os resultados dos cálculos serão apresentados abaixo.
+            </p>
+
+            <ul id="resultado" aria-live="polite"></ul>
+
+        </section>
+
+        <!-- VISUALIZAÇÃO DO CIRCUITO -->
+        <section class="caixa visualizacao">
+
+            <h2>Representação do circuito</h2>
+
+            <p class="descricao-circuito">
+                Visualização gráfica da associação elétrica calculada.
+            </p>
+
+            <div class="container-circuito">
+
+                <svg
+                    id="circuito"
+                    viewBox="0 0 600 160"
+                    role="img"
+                    aria-label="Representação gráfica do circuito elétrico"
+                >
+                </svg>
+
+            </div>
+
+        </section>
+
+        <!-- FUNDAMENTAÇÃO TEÓRICA -->
+        <section class="caixa formulas">
+
+            <h2>Fundamentação teórica</h2>
+
+            <p class="descricao">
+                Fórmulas utilizadas nos cálculos das associações elétricas.
+            </p>
+
+            <!-- SÉRIE -->
+            <div class="formula-item">
+
+                <h3>Associação em série</h3>
+
+                <p>
+                    Resistência equivalente:
+                    <strong>Req = R1 + R2 + ... + Rn</strong>
+                </p>
+
+                <p>
+                    Corrente elétrica:
+                    <strong>I = V / Req</strong>
+                </p>
+
+            </div>
+
+            <!-- PARALELO -->
+            <div class="formula-item">
+
+                <h3>Associação em paralelo</h3>
+
+                <p>
+                    Resistência equivalente:
+                    <strong>1 / Req = 1 / R1 + 1 / R2 + ... + 1 / Rn</strong>
+                </p>
+
+                <p>
+                    Corrente elétrica:
+                    <strong>I = V / Req</strong>
+                </p>
+
+            </div>
+
+            <!-- LEI DE OHM -->
+            <div class="formula-item">
+
+                <h3>Lei de Ohm</h3>
+
+                <p>
+                    <strong>V = R × I</strong>
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer>
+
+        <p>
+            Projeto acadêmico • Física III
+        </p>
+
+        <p>
+            Calculadora de Circuitos Elétricos
+        </p>
+
+    </footer>
+
+    <script src="script.js"></script>
+
 </body>
+
 </html>
+
+

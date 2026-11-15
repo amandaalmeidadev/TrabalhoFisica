@@ -1,78 +1,539 @@
-body {
-  font-family: "Trebuchet MS", Arial, sans-serif;
-  max-width: 720px;
-  margin: 20px auto;
-  padding: 0 12px;
-  background: #e9eef3;
-  color: #14263a;
+
+/* =========================================================
+   CALCULADORA DE CIRCUITOS - FÍSICA III
+   IDENTIDADE VISUAL
+   ========================================================= */
+
+:root {
+    --vinho: #7F1D1D;
+    --vinho-principal: #991B1B;
+    --vinho-hover: #B91C1C;
+
+    --vinho-claro: #FEE2E2;
+    --vinho-suave: #FFF5F5;
+
+    --fundo: #FEF2F2;
+    --branco: #FFFFFF;
+
+    --texto: #450A0A;
+    --texto-secundario: #7F1D1D;
+
+    --borda: #F3CACA;
+
+    --sombra: rgba(127, 29, 29, 0.10);
 }
 
-h1 {
-  font-size: 1.5rem;
-  margin-bottom: 12px;
+
+/* =========================================================
+   RESET E CONFIGURAÇÕES GERAIS
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--fundo);
+    color: var(--texto);
+
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px 20px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.cabecalho {
+    text-align: center;
+    margin-bottom: 35px;
+    padding: 35px 20px;
+}
+
+.subtitulo {
+    display: inline-block;
+
+    color: var(--vinho-principal);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+
+    margin-bottom: 10px;
+}
+
+.cabecalho h1 {
+    color: var(--vinho);
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+.cabecalho p {
+    color: var(--texto-secundario);
+    font-size: 1.05rem;
+}
+
+
+/* =========================================================
+   CAIXAS E SEÇÕES
+   ========================================================= */
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
 }
 
 .caixa {
-  background: #fff;
-  border: 1px solid #b8c4d0;
-  border-radius: 6px;
-  padding: 14px;
-  margin-bottom: 14px;
+    background: var(--branco);
+
+    border: 1px solid var(--borda);
+    border-radius: 16px;
+
+    padding: 28px;
+
+    box-shadow: 0 5px 18px var(--sombra);
+
+    transition: box-shadow 0.25s ease;
+}
+
+.caixa h2 {
+    color: var(--vinho);
+    font-size: 1.35rem;
+    margin-bottom: 10px;
+}
+
+.descricao {
+    color: var(--texto-secundario);
+    font-size: 0.95rem;
+    margin-bottom: 22px;
+}
+
+.descricao-circuito {
+    color: var(--texto-secundario);
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   CONFIGURAÇÕES E CAMPOS
+   ========================================================= */
+
+.configuracao-item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    margin-bottom: 18px;
 }
 
 label {
-  display: inline-block;
-  margin: 4px 10px 4px 0;
+    color: var(--texto);
+    font-weight: 600;
+    font-size: 0.95rem;
 }
 
 input,
 select {
-  padding: 6px;
-  width: 80px;
-  margin: 2px;
-  border: 1px solid #8fa0b2;
-  border-radius: 4px;
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid var(--borda);
+    border-radius: 9px;
+
+    background: #FFFAFA;
+    color: var(--texto);
+
+    font-size: 1rem;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-select {
-  width: auto;
-  max-width: 100%;
+input:focus,
+select:focus {
+    outline: none;
+
+    border-color: var(--vinho-principal);
+
+    box-shadow: 0 0 0 3px rgba(153, 27, 27, 0.12);
 }
+
+
+/* =========================================================
+   CAMPOS GERADOS PELO JAVASCRIPT
+   ========================================================= */
+
+#campos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+
+    margin-bottom: 10px;
+}
+
+#campos label {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+
+/* =========================================================
+   BOTÕES
+   ========================================================= */
 
 button {
-  padding: 9px 14px;
-  margin: 4px 6px 4px 0;
-  border: 0;
-  border-radius: 4px;
-  background: #14263a;
-  color: #fff;
-  cursor: pointer;
-  font-size: 0.95rem;
+    border: none;
+    border-radius: 9px;
+
+    padding: 13px 20px;
+
+    background: var(--vinho-principal);
+    color: white;
+
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 button:hover {
-  background: #b5651d;
+    background: var(--vinho-hover);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 12px rgba(127, 29, 29, 0.18);
 }
 
-button:focus-visible,
-input:focus-visible,
-select:focus-visible {
-  outline: 3px solid #b5651d;
-  outline-offset: 2px;
+button:active {
+    transform: translateY(0);
+}
+
+button:focus-visible {
+    outline: 3px solid #E8B4B4;
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   BOTÕES DE CÁLCULO
+   ========================================================= */
+
+.botoes-calculo {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.botoes-calculo button {
+    min-height: 55px;
+}
+
+
+/* =========================================================
+   MODELO DO CIRCUITO MISTO
+   ========================================================= */
+
+#areaModelo {
+    margin-top: 20px;
+}
+
+#areaModelo label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+#areaModelo select {
+    margin-bottom: 5px;
+}
+
+
+/* =========================================================
+   RESULTADOS
+   ========================================================= */
+
+.titulo-resultados {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+    flex-wrap: wrap;
+
+    margin-bottom: 10px;
+}
+
+.titulo-resultados h2 {
+    margin-bottom: 0;
 }
 
 #resultado {
-  padding-left: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+
+    padding: 0;
+    list-style: none;
 }
 
 #resultado li {
-  margin: 4px 0;
+    background: #FFFAFA;
+
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+
+    padding: 16px;
+
+    font-size: 0.95rem;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-svg {
-  width: 100%;
-  height: auto;
-  background: #f7fafc;
-  border: 1px solid #b8c4d0;
-  border-radius: 4px;
+#resultado li:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 4px 10px var(--sombra);
+}
+
+#resultado li.resultado-destaque {
+    background: var(--vinho-claro);
+
+    border-color: #E8B4B4;
+
+    color: var(--vinho);
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   BOTÃO LIMPAR
+   ========================================================= */
+
+.btn-limpar {
+    background: #FFF5F5;
+
+    border: 1px solid var(--borda);
+
+    color: var(--vinho);
+
+    padding: 9px 14px;
+
+    font-size: 0.85rem;
+}
+
+.btn-limpar:hover {
+    background: var(--vinho-claro);
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   VISUALIZAÇÃO DO CIRCUITO
+   ========================================================= */
+
+.container-circuito {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+
+    padding: 25px 10px;
+
+    background: var(--vinho-suave);
+
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+
+    overflow-x: auto;
+}
+
+#circuito {
+    display: block;
+
+    width: 100%;
+    min-width: 400px;
+
+    max-width: 700px;
+    height: auto;
+
+    overflow: visible;
+}
+
+
+/* =========================================================
+   FUNDAMENTAÇÃO TEÓRICA
+   ========================================================= */
+
+.formula-item {
+    background: var(--vinho-suave);
+
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+
+    padding: 20px;
+
+    margin-bottom: 15px;
+}
+
+.formula-item:last-child {
+    margin-bottom: 0;
+}
+
+.formula-item h3 {
+    color: var(--vinho-principal);
+
+    font-size: 1.05rem;
+
+    margin-bottom: 12px;
+}
+
+.formula-item p {
+    color: var(--texto-secundario);
+
+    margin-bottom: 8px;
+
+    overflow-wrap: anywhere;
+}
+
+.formula-item p:last-child {
+    margin-bottom: 0;
+}
+
+.formula-item strong {
+    color: var(--vinho);
+}
+
+
+/* =========================================================
+   RODAPÉ
+   ========================================================= */
+
+footer {
+    text-align: center;
+
+    margin-top: 40px;
+    padding: 25px 15px;
+
+    color: var(--texto-secundario);
+
+    font-size: 0.9rem;
+
+    border-top: 1px solid var(--borda);
+}
+
+footer p + p {
+    margin-top: 5px;
+    font-size: 0.8rem;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    body {
+        padding: 20px 14px;
+    }
+
+    .cabecalho {
+        padding: 25px 10px;
+    }
+
+    .cabecalho h1 {
+        font-size: 2rem;
+    }
+
+    .cabecalho p {
+        font-size: 0.95rem;
+    }
+
+    .caixa {
+        padding: 20px;
+    }
+
+    .botoes-calculo {
+        grid-template-columns: 1fr;
+    }
+
+    .botoes-calculo button {
+        width: 100%;
+    }
+
+    #campos {
+        grid-template-columns: 1fr;
+    }
+
+    #resultado {
+        grid-template-columns: 1fr;
+    }
+
+    .titulo-resultados {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .btn-limpar {
+        width: 100%;
+    }
+
+    .container-circuito {
+        padding: 20px 5px;
+    }
+
+}
+
+
+/* =========================================================
+   TELAS MUITO PEQUENAS
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .cabecalho h1 {
+        font-size: 1.7rem;
+    }
+
+    .caixa h2 {
+        font-size: 1.2rem;
+    }
+
+    .caixa {
+        padding: 16px;
+    }
+
+    button {
+        padding: 12px 15px;
+    }
+
 }
