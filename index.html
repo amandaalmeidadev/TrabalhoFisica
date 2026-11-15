@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora de Circuitos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Calculadora de Circuitos</h1>
+
+  <!-- Quantidades -->
+  <div class="caixa">
+    <label>Resistências (1 a 5):
+      <input type="number" id="qtdR" value="3" min="1" max="5">
+    </label>
+    <label>Fontes de tensão (1 a 10):
+      <input type="number" id="qtdV" value="1" min="1" max="10">
+    </label>
+    <button id="btnGerar">Gerar campos</button>
+  </div>
+
+  <!-- Campos criados pelo JavaScript -->
+  <div class="caixa" id="campos"></div>
+
+  <!-- Escolha do cálculo -->
+  <div class="caixa">
+    <button id="btnSerie">Calcular em série</button>
+    <button id="btnParalelo">Calcular em paralelo</button>
+    <button id="btnMisto">Calcular misto</button>
+
+    <!-- Só aparece depois de clicar em "Calcular misto" -->
+    <div id="areaModelo" hidden>
+      <label>Modelo do misto:
+        <select id="modelo">
+          <option value="1">R1 em série com (R2 em paralelo com R3)</option>
+          <option value="2">(R1 em série com R2) em paralelo com R3</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
+  <!-- Resultado e desenho -->
+  <div class="caixa">
+    <ul id="resultado"></ul>
+    <svg id="circuito" viewBox="0 0 600 160"></svg>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
